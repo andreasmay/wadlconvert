@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<application xmlns="http://research.sun.com/wadl/2006/10">
+	<doc xmlns:jersey="http://jersey.dev.java.net/" jersey:generatedBy="Jersey: 1.1.5.2 04/18/2012 01:45 PM"/>
+	<resources base="http://supportserver2.hin.ch:8080/ws/">
+		<resource path="/3.0/users">
+			<method id="search" name="GET">
+				<response>
+					<representation mediaType="application/xml;charset=UTF-8"/>
+				</response>
+			</method>
+			<resource path="/{login}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="login" style="template" type="xs:string"/>
+				<method id="getUserByLoginId" name="GET">
+					<response>
+						<representation mediaType="application/xml;charset=UTF-8"/>
+					</response>
+				</method>
+			</resource>
+		</resource>
+		<resource path="/3.0/mygroups">
+			<method id="getMyGroups" name="GET">
+				<response>
+					<representation mediaType="application/xml;charset=UTF-8"/>
+				</response>
+			</method>
+			<resource path="/members/{login}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="login" style="template" type="xs:string"/>
+				<method id="getMyGroupsWithUser" name="GET">
+					<response>
+						<representation mediaType="application/xml;charset=UTF-8"/>
+					</response>
+				</method>
+			</resource>
+		</resource>
+		<resource path="/3.0/groups">
+			<resource path="/{groupname}/members/{login}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="login" style="template" type="xs:string"/>
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="groupname" style="template" type="xs:string"/>
+				<method id="removeUserFromGroup" name="DELETE">
+					<response>
+						<representation mediaType="application/xml;charset=UTF-8"/>
+					</response>
+				</method>
+				<method id="getUserFromGroup" name="GET">
+					<request>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="_method" style="query" type="xs:string"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml;charset=UTF-8"/>
+					</response>
+				</method>
+				<method id="addUserToGroup" name="PUT">
+					<response>
+						<representation mediaType="application/xml;charset=UTF-8"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/{groupname}/members">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="groupname" style="template" type="xs:string"/>
+				<method id="getMembersFromGroup" name="GET">
+					<request>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:string"/>
+						<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="urionly" style="query" type="xs:boolean"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml;charset=UTF-8"/>
+					</response>
+				</method>
+			</resource>
+		</resource>
+	</resources>
+</application>
